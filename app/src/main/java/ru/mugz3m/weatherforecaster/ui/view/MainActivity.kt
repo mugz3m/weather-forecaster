@@ -1,7 +1,8 @@
-package ru.mugz3m.weatherforecaster
+package ru.mugz3m.weatherforecaster.ui.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import ru.mugz3m.weatherforecaster.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
