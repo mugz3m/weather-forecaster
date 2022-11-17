@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Weather Forecaster</string>
+
+    <!-- Fragments names in navigation graph -->
+    <string name="navigation_graph_fragment_weather_card_name">Weather</string>
+
+    <!-- Weather card fragment -->
+    <string name="fragment_weather_card_weather_condition_icon_content_description">Weather Condition Icon</string>
 </resources>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_navigation"
+    app:startDestination="@id/fragment_weather_card">
+
+    <fragment
+        android:id="@+id/fragment_weather_card"
+        android:name="ru.mugz3m.weatherforecaster.ui.view.WeatherCardFragment"
+        android:label="@string/navigation_graph_fragment_weather_card_name"
+        tools:layout="@layout/fragment_weather_card" />
+
+</navigation>
