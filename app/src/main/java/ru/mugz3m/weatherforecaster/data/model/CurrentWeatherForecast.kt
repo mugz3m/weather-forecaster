@@ -2,12 +2,6 @@ package ru.mugz3m.weatherforecaster.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class CurrentWeatherForecastResponseBody(
-    var responseBody: CurrentWeatherForecast? = null,
-    var responseCode: Int? = null,
-    var error: Throwable? = null
-)
-
 data class CurrentWeatherForecast(
     @SerializedName("lat") val latitude: Double,
     @SerializedName("lon") val longitude: Double,

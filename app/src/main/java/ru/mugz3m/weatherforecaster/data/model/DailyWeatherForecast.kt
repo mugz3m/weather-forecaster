@@ -2,12 +2,6 @@ package ru.mugz3m.weatherforecaster.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class DailyWeatherForecastResponseBody(
-    var responseBody: DailyWeatherForecast? = null,
-    var responseCode: Int? = null,
-    var error: Throwable? = null
-)
-
 data class DailyWeatherForecast(
     @SerializedName("lat") val latitude: Double,
     @SerializedName("lon") val longitude: Double,
@@ -17,7 +11,7 @@ data class DailyWeatherForecast(
 )
 
 data class Daily(
-    @SerializedName("dt") val currentTime: Long,
+    @SerializedName("dt") val timeOfTheForecastedData: Long,
     @SerializedName("sunrise") val sunriseTime: Long,
     @SerializedName("sunset") val sunsetTime: Long,
     @SerializedName("moonrise") val moonriseTime: Long,

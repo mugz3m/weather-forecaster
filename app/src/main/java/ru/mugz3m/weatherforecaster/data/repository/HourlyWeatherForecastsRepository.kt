@@ -6,13 +6,13 @@ import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import ru.mugz3m.weatherforecaster.data.datasource.OpenWeatherOneCallDataSource
-import ru.mugz3m.weatherforecaster.data.model.HourlyWeatherForecastResponseBody
+import ru.mugz3m.weatherforecaster.data.model.HourlyWeatherForecast
 
-class HourlyWeatherRepository(
+class HourlyWeatherForecastsRepository(
     private val dataSource: OpenWeatherOneCallDataSource
 ) {
-    private val _hourlyWeatherForecast = MutableLiveData<HourlyWeatherForecastResponseBody>()
-    val hourlyWeatherForecast: LiveData<HourlyWeatherForecastResponseBody> = _hourlyWeatherForecast
+    private val _hourlyWeatherForecast = MutableLiveData<HourlyWeatherForecast>()
+    val hourlyWeatherForecast: LiveData<HourlyWeatherForecast> = _hourlyWeatherForecast
 
     @MainThread
     suspend fun updateHourlyWeatherForecast(

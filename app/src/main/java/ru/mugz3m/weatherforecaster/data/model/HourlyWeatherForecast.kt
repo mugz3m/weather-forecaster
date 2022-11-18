@@ -2,12 +2,6 @@ package ru.mugz3m.weatherforecaster.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class HourlyWeatherForecastResponseBody(
-    var responseBody: HourlyWeatherForecast? = null,
-    var responseCode: Int? = null,
-    var error: Throwable? = null
-)
-
 data class HourlyWeatherForecast(
     @SerializedName("lat") val latitude: Double,
     @SerializedName("lon") val longitude: Double,
@@ -17,7 +11,7 @@ data class HourlyWeatherForecast(
 )
 
 data class Hourly(
-    @SerializedName("dt") val currentTime: Long,
+    @SerializedName("dt") val timeOfTheForecastedData: Long,
     @SerializedName("temp") val temperature: Double,
     @SerializedName("feels_like") val feelsLikeTemperature: Double,
     @SerializedName("pressure") val atmosphericPressure: Int,
