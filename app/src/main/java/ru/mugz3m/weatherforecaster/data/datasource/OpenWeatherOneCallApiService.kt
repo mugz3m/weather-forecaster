@@ -4,37 +4,24 @@ import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 import ru.mugz3m.weatherforecaster.data.model.CurrentWeatherForecast
-import ru.mugz3m.weatherforecaster.data.model.DailyWeatherForecast
-import ru.mugz3m.weatherforecaster.data.model.HourlyWeatherForecast
+import ru.mugz3m.weatherforecaster.data.model.FiveDayWeatherForecast
 
 interface OpenWeatherOneCallApiService {
-    @GET("data/3.0/onecall")
-    suspend fun getCurrentWeatherForecast(
+    @GET("data/2.5/weather")
+    fun getCurrentWeatherForecast(
         @Query("lat") latitude: Double,
         @Query("lon") longitude: Double,
-        @Query("exclude") exclude: String,
         @Query("appid") apiKey: String,
         @Query("units") units: String,
         @Query("lang") language: String
     ): Call<CurrentWeatherForecast>
 
-    @GET("data/3.0/onecall")
-    suspend fun getHourlyWeatherForecast(
+    @GET("data/2.5/forecast")
+    fun getFiveDayWeatherForecast(
         @Query("lat") latitude: Double,
         @Query("lon") longitude: Double,
-        @Query("exclude") exclude: String,
         @Query("appid") apiKey: String,
         @Query("units") units: String,
         @Query("lang") language: String
-    ): Call<HourlyWeatherForecast>
-
-    @GET("data/3.0/onecall")
-    suspend fun getDailyWeatherForecast(
-        @Query("lat") latitude: Double,
-        @Query("lon") longitude: Double,
-        @Query("exclude") exclude: String,
-        @Query("appid") apiKey: String,
-        @Query("units") units: String,
-        @Query("lang") language: String
-    ): Call<DailyWeatherForecast>
+    ): Call<FiveDayWeatherForecast>
 }

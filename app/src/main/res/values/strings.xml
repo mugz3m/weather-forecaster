@@ -6,4 +6,6 @@
 
     <!-- Weather fragment -->
     <string name="weather_condition_icon_content_description">Weather Condition Icon</string>
+    <string name="weather_condition_feels_like_title">Feels like</string>
+    <string name="current_weather_forecast_title">Current location</string>
 </resources>

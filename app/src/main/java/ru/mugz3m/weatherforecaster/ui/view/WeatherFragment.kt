@@ -24,7 +24,6 @@ class WeatherFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         fragmentComponent = WeatherFragmentComponent(
-            applicationComponent,
             fragment = this,
             viewModel = viewModel
         )

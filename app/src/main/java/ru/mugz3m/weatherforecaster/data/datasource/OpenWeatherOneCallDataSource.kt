@@ -1,19 +1,18 @@
 package ru.mugz3m.weatherforecaster.data.datasource
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import ru.mugz3m.weatherforecaster.data.model.CurrentWeatherForecast
-import ru.mugz3m.weatherforecaster.data.model.DailyWeatherForecast
-import ru.mugz3m.weatherforecaster.data.model.HourlyWeatherForecast
+import ru.mugz3m.weatherforecaster.data.model.FiveDayWeatherForecast
 
 class OpenWeatherOneCallDataSource(private val retrofit: Retrofit) {
     suspend fun getCurrentWeatherForecast(
         latitude: Double,
         longitude: Double,
-        exclude: String,
         apiKey: String,
         units: String,
         language: String,
@@ -23,7 +22,6 @@ class OpenWeatherOneCallDataSource(private val retrofit: Retrofit) {
         val call = service.getCurrentWeatherForecast(
             latitude,
             longitude,
-            exclude,
             apiKey,
             units,
             language
@@ -38,71 +36,41 @@ class OpenWeatherOneCallDataSource(private val retrofit: Retrofit) {
                 }
             }
 
-            override fun onFailure(call: Call<CurrentWeatherForecast>, throwable: Throwable) = Unit
+            override fun onFailure(call: Call<CurrentWeatherForecast>, throwable: Throwable) {
+                Log.d("OPEN_WEATHER_ONE_CALL_DATA_SOURCE", throwable.message.toString())
+            }
         })
     }
 
-    suspend fun getHourlyWeatherForecast(
+    suspend fun getFiveDayWeatherForecast(
         latitude: Double,
         longitude: Double,
-        exclude: String,
         apiKey: String,
         units: String,
         language: String,
-        getHourlyWeatherForecastLiveData: MutableLiveData<HourlyWeatherForecast>
+        getFiveDayWeatherForecastLiveData: MutableLiveData<FiveDayWeatherForecast>
     ) {
         val service = retrofit.create(OpenWeatherOneCallApiService::class.java)
-        val call = service.getHourlyWeatherForecast(
+        val call = service.getFiveDayWeatherForecast(
             latitude,
             longitude,
-            exclude,
             apiKey,
             units,
             language
         )
-        call.enqueue(object : Callback<HourlyWeatherForecast> {
+        call.enqueue(object : Callback<FiveDayWeatherForecast> {
             override fun onResponse(
-                call: Call<HourlyWeatherForecast>,
-                response: Response<HourlyWeatherForecast>
+                call: Call<FiveDayWeatherForecast>,
+                response: Response<FiveDayWeatherForecast>
             ) {
                 if (response.code() == 200) {
-                    getHourlyWeatherForecastLiveData.value = response.body()
+                    getFiveDayWeatherForecastLiveData.value = response.body()
                 }
             }
 
-            override fun onFailure(call: Call<HourlyWeatherForecast>, throwable: Throwable) = Unit
-        })
-    }
-
-    suspend fun getDailyWeatherForecast(
-        latitude: Double,
-        longitude: Double,
-        exclude: String,
-        apiKey: String,
-        units: String,
-        language: String,
-        getDailyWeatherForecastLiveData: MutableLiveData<DailyWeatherForecast>
-    ) {
-        val service = retrofit.create(OpenWeatherOneCallApiService::class.java)
-        val call = service.getDailyWeatherForecast(
-            latitude,
-            longitude,
-            exclude,
-            apiKey,
-            units,
-            language
-        )
-        call.enqueue(object : Callback<DailyWeatherForecast> {
-            override fun onResponse(
-                call: Call<DailyWeatherForecast>,
-                response: Response<DailyWeatherForecast>
-            ) {
-                if (response.code() == 200) {
-                    getDailyWeatherForecastLiveData.value = response.body()
-                }
+            override fun onFailure(call: Call<FiveDayWeatherForecast>, throwable: Throwable) {
+                Log.d("OPEN_WEATHER_ONE_CALL_DATA_SOURCE", throwable.message.toString())
             }
-
-            override fun onFailure(call: Call<DailyWeatherForecast>, throwable: Throwable) = Unit
         })
     }
 }

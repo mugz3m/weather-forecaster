@@ -19,7 +19,6 @@ class CurrentWeatherForecastRepository(
     suspend fun updateCurrentWeatherForecast(
         latitude: Double,
         longitude: Double,
-        exclude: String,
         apiKey: String,
         units: String,
         language: String
@@ -28,7 +27,6 @@ class CurrentWeatherForecastRepository(
             dataSource.getCurrentWeatherForecast(
                 latitude,
                 longitude,
-                exclude,
                 apiKey,
                 units,
                 language,

@@ -1,45 +1,38 @@
 package ru.mugz3m.weatherforecaster.ui.model
 
 import ru.mugz3m.weatherforecaster.data.model.CurrentWeatherForecast
-import ru.mugz3m.weatherforecaster.data.model.Daily
-import ru.mugz3m.weatherforecaster.data.model.Hourly
+import ru.mugz3m.weatherforecaster.data.model.FiveDayWeatherForecastItem
 
 class WeatherForecastDataTransformer {
-    fun transformCurrentWeatherForecastToCurrentWeatherModel(
+    fun transformCurrentWeatherForecastToCurrentWeatherForecastModel(
         currentWeatherForecast: CurrentWeatherForecast
     ): CurrentWeatherForecastModel {
         return CurrentWeatherForecastModel(
-            currentWeatherForecast.current.temperature,
-            currentWeatherForecast.current.feelsLikeTemperature,
-            currentWeatherForecast.current.atmosphericPressure,
-            currentWeatherForecast.current.humidity,
-            currentWeatherForecast.current.windSpeed,
-            currentWeatherForecast.current.windDirection,
-            currentWeatherForecast.current.weatherConditions.weatherCondition,
-            currentWeatherForecast.current.weatherConditions.weatherIconId
+            currentWeatherForecast.weatherParameters.temperature,
+            currentWeatherForecast.weatherParameters.feelsLikeTemperature,
+            currentWeatherForecast.weatherParameters.atmosphericPressure,
+            currentWeatherForecast.weatherParameters.humidity,
+            currentWeatherForecast.wind.windSpeed,
+            currentWeatherForecast.wind.windDirection,
+            currentWeatherForecast.weatherConditions[0].weatherCondition,
+            currentWeatherForecast.weatherConditions[0].weatherIconId
         )
     }
 
-    fun transformHourlyToHourlyWeatherItemModel(hourly: Hourly): HourlyWeatherForecastItemModel {
-        return HourlyWeatherForecastItemModel(
-            hourly.timeOfTheForecastedData,
-            hourly.temperature,
-            hourly.weatherConditions.weatherIconId,
+    private fun transformFiveDayWeatherForecastItemToFiveDayWeatherForecastModel(
+        fiveDayWeatherForecastItem: FiveDayWeatherForecastItem
+    ): FiveDayWeatherForecastItemModel {
+        return FiveDayWeatherForecastItemModel(
+            fiveDayWeatherForecastItem.timeOfTheForecastedData,
+            fiveDayWeatherForecastItem.weatherParameters.temperature,
+            fiveDayWeatherForecastItem.weatherConditions[0].weatherIconId
         )
     }
 
-    fun transformHourlyListToHourlyWeatherItemModelList(hourlyList: List<Hourly>): List<HourlyWeatherForecastItemModel> =
-        hourlyList.map { it -> transformHourlyToHourlyWeatherItemModel(it) }
-
-    fun transformDailyToDailyWeatherItemModel(daily: Daily): DailyWeatherForecastItemModel {
-        return DailyWeatherForecastItemModel(
-            daily.timeOfTheForecastedData,
-            daily.temperaturesDuringTheDay.minDaily,
-            daily.temperaturesDuringTheDay.maxDaily,
-            daily.weatherConditions.weatherIconId
-        )
-    }
-
-    fun transformDailyListToDailyWeatherItemModelList(dailyList: List<Daily>): List<DailyWeatherForecastItemModel> =
-        dailyList.map { it -> transformDailyToDailyWeatherItemModel(it) }
+    fun transformFiveDayWeatherForecastItemListToFiveDayWeatherForecastModelList(
+        fiveDayWeatherForecastItems: List<FiveDayWeatherForecastItem>
+    ): List<FiveDayWeatherForecastItemModel> =
+        fiveDayWeatherForecastItems.map { it ->
+            transformFiveDayWeatherForecastItemToFiveDayWeatherForecastModel(it)
+        }
 }

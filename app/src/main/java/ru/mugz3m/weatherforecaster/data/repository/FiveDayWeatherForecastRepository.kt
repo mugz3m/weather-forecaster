@@ -6,32 +6,30 @@ import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import ru.mugz3m.weatherforecaster.data.datasource.OpenWeatherOneCallDataSource
-import ru.mugz3m.weatherforecaster.data.model.DailyWeatherForecast
+import ru.mugz3m.weatherforecaster.data.model.FiveDayWeatherForecast
 
-class DailyWeatherForecastsRepository(
+class FiveDayWeatherForecastRepository(
     private val dataSource: OpenWeatherOneCallDataSource
 ) {
-    private val _dailyWeatherForecast = MutableLiveData<DailyWeatherForecast>()
-    val dailyWeatherForecast: LiveData<DailyWeatherForecast> = _dailyWeatherForecast
+    private val _fiveDayWeatherForecast = MutableLiveData<FiveDayWeatherForecast>()
+    val fiveDayWeatherForecast: LiveData<FiveDayWeatherForecast> = _fiveDayWeatherForecast
 
     @MainThread
-    suspend fun updateDailyWeatherForecast(
+    suspend fun updateFiveDayWeatherForecast(
         latitude: Double,
         longitude: Double,
-        exclude: String,
         apiKey: String,
         units: String,
         language: String
     ) {
         withContext(Dispatchers.IO) {
-            dataSource.getDailyWeatherForecast(
+            dataSource.getFiveDayWeatherForecast(
                 latitude,
                 longitude,
-                exclude,
                 apiKey,
                 units,
                 language,
-                _dailyWeatherForecast
+                _fiveDayWeatherForecast
             )
         }
     }

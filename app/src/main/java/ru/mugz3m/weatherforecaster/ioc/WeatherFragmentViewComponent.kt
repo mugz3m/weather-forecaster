@@ -8,12 +8,11 @@ class WeatherFragmentViewComponent(
     fragmentComponent: WeatherFragmentComponent,
     root: View,
     lifecycleOwner: LifecycleOwner
-) {
+    ) {
     val weatherForecastsViewController = WeatherForecastsViewController(
         fragmentComponent.fragment.requireActivity(),
         root,
-        fragmentComponent.hourlyForecastAdapter,
-        fragmentComponent.dailyForecastAdapter,
+        fragmentComponent.fiveDayWeatherForecastAdapter,
         lifecycleOwner,
         fragmentComponent.viewModel
     )

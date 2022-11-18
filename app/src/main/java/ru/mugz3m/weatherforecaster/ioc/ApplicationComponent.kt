@@ -4,8 +4,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.mugz3m.weatherforecaster.data.datasource.OpenWeatherOneCallDataSource
 import ru.mugz3m.weatherforecaster.data.repository.CurrentWeatherForecastRepository
-import ru.mugz3m.weatherforecaster.data.repository.DailyWeatherForecastsRepository
-import ru.mugz3m.weatherforecaster.data.repository.HourlyWeatherForecastsRepository
+import ru.mugz3m.weatherforecaster.data.repository.FiveDayWeatherForecastRepository
 
 class ApplicationComponent {
     private val retrofit = Retrofit.Builder()
@@ -18,14 +17,11 @@ class ApplicationComponent {
     private val currentWeatherForecastRepository =
         CurrentWeatherForecastRepository(weatherDataSource)
 
-    private val hourlyWeatherForecastsRepository =
-        HourlyWeatherForecastsRepository(weatherDataSource)
-
-    private val dailyWeatherForecastsRepository = DailyWeatherForecastsRepository(weatherDataSource)
+    private val fiveDayWeatherForecastRepository =
+        FiveDayWeatherForecastRepository(weatherDataSource)
 
     val viewModelFactory = ViewModelFactory(
         currentWeatherForecastRepository,
-        hourlyWeatherForecastsRepository,
-        dailyWeatherForecastsRepository
+        fiveDayWeatherForecastRepository
     )
 }

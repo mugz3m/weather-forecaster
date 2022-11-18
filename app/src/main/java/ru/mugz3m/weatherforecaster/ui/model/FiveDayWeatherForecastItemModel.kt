@@ -1,8 +1,7 @@
 package ru.mugz3m.weatherforecaster.ui.model
 
-data class DailyWeatherForecastItemModel(
+data class FiveDayWeatherForecastItemModel(
     val timeOfTheForecastedData: Long,
-    val minDailyTemperature: Double,
-    val maxDailyTemperature: Double,
+    val temperature: Double,
     val weatherIconId: String
 )

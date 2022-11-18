@@ -4,28 +4,28 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import ru.mugz3m.weatherforecaster.R
-import ru.mugz3m.weatherforecaster.ui.model.DailyWeatherForecastItemModel
+import ru.mugz3m.weatherforecaster.ui.model.FiveDayWeatherForecastItemModel
 import ru.mugz3m.weatherforecaster.ui.stateholders.WeatherViewModel
 
-class DailyWeatherForecastsListAdapter(
+class FiveDayWeatherForecastAdapter(
     private val viewModel: WeatherViewModel,
-    dailyWeatherForecastDiffCalculator: DailyWeatherForecastItemDiffCalculator
-) : ListAdapter<DailyWeatherForecastItemModel, DailyWeatherForecastViewHolder>(
+    dailyWeatherForecastDiffCalculator: FiveDayWeatherForecastItemDiffCalculator
+) : ListAdapter<FiveDayWeatherForecastItemModel, FiveDayWeatherForecastViewHolder>(
     dailyWeatherForecastDiffCalculator
 ) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): DailyWeatherForecastViewHolder {
+    ): FiveDayWeatherForecastViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(
-            R.layout.daily_forecast_item,
+            R.layout.five_day_weather_forecast_item,
             parent,
             false
         )
-        return DailyWeatherForecastViewHolder(itemView, viewModel)
+        return FiveDayWeatherForecastViewHolder(itemView, viewModel)
     }
 
-    override fun onBindViewHolder(holder: DailyWeatherForecastViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: FiveDayWeatherForecastViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 }
