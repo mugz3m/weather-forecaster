@@ -28,6 +28,10 @@ class WeatherViewModel(
     val currentWeatherForecast = currentWeatherForecastRepository.currentWeatherForecast
     val fiveDayWeatherForecast = fiveDayWeatherForecastRepository.fiveDayWeatherForecast
 
+    init {
+        updateAllWeatherForecasts()
+    }
+
     fun updateAllWeatherForecasts() {
         viewModelScope.launch {
             withContext(Dispatchers.Main) {
