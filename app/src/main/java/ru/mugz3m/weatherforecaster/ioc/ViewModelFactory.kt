@@ -2,8 +2,8 @@ package ru.mugz3m.weatherforecaster.ioc
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import ru.mugz3m.weatherforecaster.data.repository.CurrentWeatherForecastRepository
-import ru.mugz3m.weatherforecaster.data.repository.FiveDayWeatherForecastRepository
+import ru.mugz3m.weatherforecaster.data.weather.repository.CurrentWeatherForecastRepository
+import ru.mugz3m.weatherforecaster.data.weather.repository.FiveDayWeatherForecastRepository
 import ru.mugz3m.weatherforecaster.ui.stateholders.WeatherViewModel
 
 class ViewModelFactory(

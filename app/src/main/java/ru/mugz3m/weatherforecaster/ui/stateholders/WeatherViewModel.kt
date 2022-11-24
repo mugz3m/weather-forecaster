@@ -6,8 +6,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.joinAll
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import ru.mugz3m.weatherforecaster.data.repository.CurrentWeatherForecastRepository
-import ru.mugz3m.weatherforecaster.data.repository.FiveDayWeatherForecastRepository
+import ru.mugz3m.weatherforecaster.data.weather.model.CurrentWeatherForecast
+import ru.mugz3m.weatherforecaster.data.weather.model.FiveDayWeatherForecast
+import ru.mugz3m.weatherforecaster.data.weather.repository.CurrentWeatherForecastRepository
+import ru.mugz3m.weatherforecaster.data.weather.repository.FiveDayWeatherForecastRepository
 
 class WeatherViewModel(
     private val currentWeatherForecastRepository: CurrentWeatherForecastRepository,

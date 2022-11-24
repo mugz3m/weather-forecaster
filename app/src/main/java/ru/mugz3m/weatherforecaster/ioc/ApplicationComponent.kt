@@ -2,9 +2,9 @@ package ru.mugz3m.weatherforecaster.ioc
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import ru.mugz3m.weatherforecaster.data.datasource.OpenWeatherOneCallDataSource
-import ru.mugz3m.weatherforecaster.data.repository.CurrentWeatherForecastRepository
-import ru.mugz3m.weatherforecaster.data.repository.FiveDayWeatherForecastRepository
+import ru.mugz3m.weatherforecaster.data.weather.datasource.OpenWeatherOneCallDataSource
+import ru.mugz3m.weatherforecaster.data.weather.repository.CurrentWeatherForecastRepository
+import ru.mugz3m.weatherforecaster.data.weather.repository.FiveDayWeatherForecastRepository
 
 class ApplicationComponent {
     private val retrofit = Retrofit.Builder()

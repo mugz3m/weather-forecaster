@@ -18,7 +18,6 @@ class WeatherFragment : Fragment() {
         get() = App.get(requireContext()).applicationComponent
     private lateinit var fragmentComponent: WeatherFragmentComponent
     private var fragmentViewComponent: WeatherFragmentViewComponent? = null
-
     private val viewModel: WeatherViewModel by viewModels { applicationComponent.viewModelFactory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,9 +36,7 @@ class WeatherFragment : Fragment() {
             fragmentComponent,
             root = view,
             lifecycleOwner = viewLifecycleOwner
-        ).apply {
-            weatherForecastsViewController.setUpViews()
-        }
+        ).apply { weatherForecastsViewController.setUpViews() }
         return view
     }
 

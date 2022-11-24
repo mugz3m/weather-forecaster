@@ -1,4 +1,4 @@
-package ru.mugz3m.weatherforecaster.data.datasource
+package ru.mugz3m.weatherforecaster.data.weather.datasource
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
@@ -6,8 +6,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
-import ru.mugz3m.weatherforecaster.data.model.CurrentWeatherForecast
-import ru.mugz3m.weatherforecaster.data.model.FiveDayWeatherForecast
+import ru.mugz3m.weatherforecaster.data.weather.model.CurrentWeatherForecast
+import ru.mugz3m.weatherforecaster.data.weather.model.FiveDayWeatherForecast
 
 class OpenWeatherOneCallDataSource(private val retrofit: Retrofit) {
     suspend fun getCurrentWeatherForecast(
