@@ -11,7 +11,6 @@ class WeatherFragmentComponent(
 ) {
     val fiveDayWeatherForecastAdapter =
         FiveDayWeatherForecastAdapter(
-            viewModel,
             FiveDayWeatherForecastItemDiffCalculator()
         )
 }

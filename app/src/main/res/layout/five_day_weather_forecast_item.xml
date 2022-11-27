@@ -14,11 +14,12 @@
 
     <ImageView
         android:id="@+id/five_day_weather_forecast_item_weather_condition_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="32sp"
+        android:layout_height="32sp"
         android:layout_margin="8sp"
         android:contentDescription="@string/weather_condition_icon_content_description"
-        app:layout_constraintEnd_toStartOf="@+id/five_day_weather_forecast_item_temperature"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/five_day_weather_forecast_item_forecasted_date"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView

@@ -8,13 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.*
 import ru.mugz3m.weatherforecaster.R
 import ru.mugz3m.weatherforecaster.ui.model.FiveDayWeatherForecastItemModel
-import ru.mugz3m.weatherforecaster.ui.stateholders.WeatherViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
 class FiveDayWeatherForecastViewHolder(
     itemView: View,
-    private val viewModel: WeatherViewModel
+    private val glideImageLoader: GlideImageLoader
 ) : RecyclerView.ViewHolder(itemView) {
     private val date =
         itemView.findViewById<TextView>(R.id.five_day_weather_forecast_item_forecasted_date)
@@ -25,6 +24,7 @@ class FiveDayWeatherForecastViewHolder(
 
     fun bind(fiveDayWeatherForecast: FiveDayWeatherForecastItemModel) {
         date.text = formatUnixTimeToDate(fiveDayWeatherForecast.timeOfTheForecastedData)
+        glideImageLoader.loadWeatherIconInImageView(fiveDayWeatherForecast.weatherIconId, icon)
         temperature.text = fiveDayWeatherForecast.temperature.toString().plus(" °C")
     }
 
