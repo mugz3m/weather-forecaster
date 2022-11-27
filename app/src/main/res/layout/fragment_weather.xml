@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_weather_swipe_refresh_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/fragments_horizontal_margin">
 
         <TextView
@@ -16,6 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16sp"
             android:text="@string/current_weather_forecast_title"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -24,7 +26,7 @@
             android:id="@+id/fragment_weather_temperature_linear_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32sp"
+            android:layout_marginTop="16sp"
             android:gravity="center"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
@@ -35,7 +37,8 @@
                 android:id="@+id/fragment_weather_temperature"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="8sp" />
+                android:layout_margin="8sp"
+                android:textSize="24sp" />
 
             <ImageView
                 android:id="@+id/fragment_weather_weather_condition_icon"
@@ -82,8 +85,7 @@
             android:id="@+id/fragment_weather_wind_pressure_humidity_constraint_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="fill_horizontal"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:padding="8sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -93,35 +95,41 @@
                 android:id="@+id/fragment_weather_wind_speed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="8sp" />
-
-            <TextView
-                android:id="@+id/fragment_weather_wind_direction"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8sp" />
+                android:layout_margin="8sp"
+                android:drawablePadding="8sp"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                app:drawableStartCompat="@drawable/ic_vector_wind" />
 
             <TextView
                 android:id="@+id/fragment_weather_pressure"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="8sp" />
+                android:layout_margin="8sp"
+                android:drawablePadding="8sp"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                app:drawableStartCompat="@drawable/ic_outline_pressure" />
 
             <TextView
                 android:id="@+id/fragment_weather_humidity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="8sp" />
+                android:layout_margin="8sp"
+                android:drawablePadding="8sp"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                app:drawableStartCompat="@drawable/ic_baseline_water_drop" />
 
         </LinearLayout>
 
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/fragment_weather_five_day_forecast_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="240dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fragment_weather_wind_pressure_humidity_constraint_layout" />
 

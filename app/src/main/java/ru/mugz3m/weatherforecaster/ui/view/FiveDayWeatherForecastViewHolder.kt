@@ -17,6 +17,8 @@ class FiveDayWeatherForecastViewHolder(
 ) : RecyclerView.ViewHolder(itemView) {
     private val date =
         itemView.findViewById<TextView>(R.id.five_day_weather_forecast_item_forecasted_date)
+    private val time =
+        itemView.findViewById<TextView>(R.id.five_day_weather_forecast_item_forecasted_time)
     private val icon =
         itemView.findViewById<ImageView>(R.id.five_day_weather_forecast_item_weather_condition_icon)
     private val temperature =
@@ -24,13 +26,20 @@ class FiveDayWeatherForecastViewHolder(
 
     fun bind(fiveDayWeatherForecast: FiveDayWeatherForecastItemModel) {
         date.text = formatUnixTimeToDate(fiveDayWeatherForecast.timeOfTheForecastedData)
+        time.text = formatUnixTimeToTime(fiveDayWeatherForecast.timeOfTheForecastedData)
         glideImageLoader.loadWeatherIconInImageView(fiveDayWeatherForecast.weatherIconId, icon)
         temperature.text = fiveDayWeatherForecast.temperature.toString().plus(" °C")
     }
 
     @SuppressLint("SimpleDateFormat")
     private fun formatUnixTimeToDate(unixTime: Long): String {
-        val dateFormat = SimpleDateFormat("dd/MM HH:mm")
+        val dateFormat = SimpleDateFormat("dd.MM")
+        return dateFormat.format(Date(unixTime * 1000L))
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    private fun formatUnixTimeToTime(unixTime: Long): String {
+        val dateFormat = SimpleDateFormat("HH:mm")
         return dateFormat.format(Date(unixTime * 1000L))
     }
 }

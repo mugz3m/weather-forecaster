@@ -1,33 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="8sp">
 
     <TextView
         android:id="@+id/five_day_weather_forecast_item_forecasted_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/five_day_weather_forecast_item_forecasted_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/five_day_weather_forecast_item_forecasted_date" />
 
     <ImageView
         android:id="@+id/five_day_weather_forecast_item_weather_condition_icon"
         android:layout_width="32sp"
         android:layout_height="32sp"
-        android:layout_margin="8sp"
         android:contentDescription="@string/weather_condition_icon_content_description"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/five_day_weather_forecast_item_forecasted_date"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/five_day_weather_forecast_item_forecasted_time" />
 
     <TextView
         android:id="@+id/five_day_weather_forecast_item_temperature"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/five_day_weather_forecast_item_weather_condition_icon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

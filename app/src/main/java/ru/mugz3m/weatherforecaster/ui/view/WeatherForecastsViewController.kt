@@ -22,22 +22,18 @@ class WeatherForecastsViewController(
 ) {
     private val weatherForecastDataTransformer = WeatherForecastDataTransformer()
 
-    private val currentWeatherForecastTemperature: TextView =
+    private val temperatureTextView: TextView =
         rootView.findViewById(R.id.fragment_weather_temperature)
-    private val currentWeatherForecastWeatherConditionIcon: ImageView =
+    private val weatherConditionIconImageView: ImageView =
         rootView.findViewById(R.id.fragment_weather_weather_condition_icon)
-    private val currentWeatherForecastWeatherConditionDescription: TextView =
+    private val weatherConditionDescriptionTextView: TextView =
         rootView.findViewById(R.id.fragment_weather_weather_condition_description)
-    private val currentWeatherForecastWeatherFeelsLikeTemperature: TextView =
+    private val feelsLikeTemperatureTextView: TextView =
         rootView.findViewById(R.id.fragment_weather_feels_like_temperature)
-    private val currentWeatherForecastWeatherWindSpeed: TextView =
+    private val windSpeedTextView: TextView =
         rootView.findViewById(R.id.fragment_weather_wind_speed)
-    private val currentWeatherForecastWeatherWindDirection: TextView =
-        rootView.findViewById(R.id.fragment_weather_wind_direction)
-    private val currentWeatherForecastWeatherPressure: TextView =
-        rootView.findViewById(R.id.fragment_weather_pressure)
-    private val currentWeatherForecastWeatherHumidity: TextView =
-        rootView.findViewById(R.id.fragment_weather_humidity)
+    private val pressureTextView: TextView = rootView.findViewById(R.id.fragment_weather_pressure)
+    private val humidityTextView: TextView = rootView.findViewById(R.id.fragment_weather_humidity)
 
     private val fiveDayWeatherForecastRecyclerView: RecyclerView =
         rootView.findViewById(R.id.fragment_weather_five_day_forecast_recycler_view)
@@ -56,31 +52,72 @@ class WeatherForecastsViewController(
                 weatherForecastDataTransformer.transformCurrentWeatherForecastToCurrentWeatherForecastModel(
                     newCurrentWeatherForecast
                 )
-            currentWeatherForecastTemperature.text =
+
+            temperatureTextView.text =
                 newCurrentWeatherForecastModel.temperature.toString().plus(" °C")
+
             glideImageLoader.loadWeatherIconInImageView(
                 newCurrentWeatherForecastModel.weatherIconId,
-                currentWeatherForecastWeatherConditionIcon
+                weatherConditionIconImageView
             )
-            currentWeatherForecastWeatherConditionDescription.text =
+            weatherConditionDescriptionTextView.text =
                 newCurrentWeatherForecastModel.weatherCondition
-            currentWeatherForecastWeatherFeelsLikeTemperature.text =
+
+            feelsLikeTemperatureTextView.text =
                 newCurrentWeatherForecastModel.feelsLikeTemperature.toString().plus(" °C")
-            currentWeatherForecastWeatherWindSpeed.text =
-                newCurrentWeatherForecastModel.windSpeed.toString()
-            currentWeatherForecastWeatherWindDirection.text =
-                newCurrentWeatherForecastModel.windDirection.toString()
-            currentWeatherForecastWeatherPressure.text =
-                newCurrentWeatherForecastModel.atmosphericPressure.toString()
-            currentWeatherForecastWeatherHumidity.text =
-                newCurrentWeatherForecastModel.humidity.toString()
+
+            when (newCurrentWeatherForecastModel.windDirection) {
+                WindDirections.NORTH.degree -> windSpeedTextView.text =
+                    newCurrentWeatherForecastModel.windSpeed.toString()
+                        .plus(" m/s")
+                        .plus(", ${WindDirections.NORTH.abbreviation}")
+                WindDirections.NORTHEAST.degree -> windSpeedTextView.text =
+                    newCurrentWeatherForecastModel.windSpeed.toString()
+                        .plus(" m/s")
+                        .plus(", ${WindDirections.NORTH.abbreviation}")
+                WindDirections.EAST.degree -> windSpeedTextView.text =
+                    newCurrentWeatherForecastModel.windSpeed.toString()
+                        .plus(" m/s")
+                        .plus(", ${WindDirections.NORTH.abbreviation}")
+                WindDirections.SOUTHEAST.degree -> windSpeedTextView.text =
+                    newCurrentWeatherForecastModel.windSpeed.toString()
+                        .plus(" m/s")
+                        .plus(", ${WindDirections.NORTH.abbreviation}")
+                WindDirections.SOUTH.degree -> windSpeedTextView.text =
+                    newCurrentWeatherForecastModel.windSpeed.toString()
+                        .plus(" m/s")
+                        .plus(", ${WindDirections.NORTH.abbreviation}")
+                WindDirections.SOUTHWEST.degree -> windSpeedTextView.text =
+                    newCurrentWeatherForecastModel.windSpeed.toString()
+                        .plus(" m/s")
+                        .plus(", ${WindDirections.NORTH.abbreviation}")
+                WindDirections.WEST.degree -> windSpeedTextView.text =
+                    newCurrentWeatherForecastModel.windSpeed.toString()
+                        .plus(" m/s")
+                        .plus(", ${WindDirections.NORTH.abbreviation}")
+                WindDirections.NORTHWEST.degree -> windSpeedTextView.text =
+                    newCurrentWeatherForecastModel.windSpeed.toString()
+                        .plus(" m/s")
+                        .plus(", ${WindDirections.NORTH.abbreviation}")
+                else -> windSpeedTextView.text =
+                    newCurrentWeatherForecastModel.windSpeed.toString()
+                        .plus(" m/s")
+                        .plus(", ${WindDirections.NORTH.abbreviation}")
+            }
+
+            pressureTextView.text =
+                newCurrentWeatherForecastModel.atmosphericPressure.toString().plus(", hPa")
+
+            humidityTextView.text =
+                newCurrentWeatherForecastModel.humidity.toString().plus(" %")
 
             swipeRefreshLayout.isRefreshing = false
         }
     }
 
     private fun setUpFiveDayWeatherForecastsList() {
-        fiveDayWeatherForecastRecyclerView.layoutManager = LinearLayoutManager(activity)
+        fiveDayWeatherForecastRecyclerView.layoutManager =
+            LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         fiveDayWeatherForecastRecyclerView.adapter = fiveDayWeatherForecastAdapter
         viewModel.fiveDayWeatherForecast.observe(lifecycleOwner) { newFiveDayWeatherForecast ->
             fiveDayWeatherForecastAdapter.submitList(
@@ -97,4 +134,15 @@ class WeatherForecastsViewController(
             viewModel.updateAllWeatherForecasts()
         }
     }
+}
+
+enum class WindDirections(val degree: Int, val abbreviation: String) {
+    NORTH(0, "N"),
+    NORTHEAST(45, "NE"),
+    EAST(90, "E"),
+    SOUTHEAST(135, "SE"),
+    SOUTH(180, "S"),
+    SOUTHWEST(225, "SW"),
+    WEST(270, "W"),
+    NORTHWEST(315, "NW")
 }
