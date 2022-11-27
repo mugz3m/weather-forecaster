@@ -24,9 +24,9 @@
             android:id="@+id/fragment_weather_temperature_linear_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="32sp"
             android:gravity="center"
             android:orientation="horizontal"
-            android:layout_marginTop="32sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fragment_weather_city_name">
@@ -39,10 +39,10 @@
 
             <ImageView
                 android:id="@+id/fragment_weather_weather_condition_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/weather_condition_icon_content_description"
-                android:layout_margin="8sp" />
+                android:layout_width="52sp"
+                android:layout_height="52sp"
+                android:layout_margin="8sp"
+                android:contentDescription="@string/weather_condition_icon_content_description" />
 
         </LinearLayout>
 
@@ -119,7 +119,7 @@
             android:id="@+id/fragment_weather_five_day_forecast_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="208dp"
+            android:layout_marginTop="240dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"

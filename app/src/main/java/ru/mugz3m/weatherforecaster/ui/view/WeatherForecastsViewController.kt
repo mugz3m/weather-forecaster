@@ -1,7 +1,6 @@
 package ru.mugz3m.weatherforecaster.ui.view
 
 import android.app.Activity
-import android.location.Location
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -18,10 +17,10 @@ class WeatherForecastsViewController(
     rootView: View,
     private val fiveDayWeatherForecastAdapter: FiveDayWeatherForecastAdapter,
     private val lifecycleOwner: LifecycleOwner,
-    private val viewModel: WeatherViewModel
+    private val viewModel: WeatherViewModel,
+    private val glideImageLoader: GlideImageLoader
 ) {
     private val weatherForecastDataTransformer = WeatherForecastDataTransformer()
-    private val lastLocation: Location? = null
 
     private val currentWeatherForecastTemperature: TextView =
         rootView.findViewById(R.id.fragment_weather_temperature)
@@ -59,6 +58,10 @@ class WeatherForecastsViewController(
                 )
             currentWeatherForecastTemperature.text =
                 newCurrentWeatherForecastModel.temperature.toString().plus(" °C")
+            glideImageLoader.loadWeatherIconInImageView(
+                newCurrentWeatherForecastModel.weatherIconId,
+                currentWeatherForecastWeatherConditionIcon
+            )
             currentWeatherForecastWeatherConditionDescription.text =
                 newCurrentWeatherForecastModel.weatherCondition
             currentWeatherForecastWeatherFeelsLikeTemperature.text =
@@ -77,8 +80,7 @@ class WeatherForecastsViewController(
     }
 
     private fun setUpFiveDayWeatherForecastsList() {
-        fiveDayWeatherForecastRecyclerView.layoutManager =
-            LinearLayoutManager(activity)
+        fiveDayWeatherForecastRecyclerView.layoutManager = LinearLayoutManager(activity)
         fiveDayWeatherForecastRecyclerView.adapter = fiveDayWeatherForecastAdapter
         viewModel.fiveDayWeatherForecast.observe(lifecycleOwner) { newFiveDayWeatherForecast ->
             fiveDayWeatherForecastAdapter.submitList(

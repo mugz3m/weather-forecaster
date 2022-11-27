@@ -5,10 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import ru.mugz3m.weatherforecaster.R
 import ru.mugz3m.weatherforecaster.ui.model.FiveDayWeatherForecastItemModel
-import ru.mugz3m.weatherforecaster.ui.stateholders.WeatherViewModel
 
 class FiveDayWeatherForecastAdapter(
-    private val viewModel: WeatherViewModel,
     dailyWeatherForecastDiffCalculator: FiveDayWeatherForecastItemDiffCalculator
 ) : ListAdapter<FiveDayWeatherForecastItemModel, FiveDayWeatherForecastViewHolder>(
     dailyWeatherForecastDiffCalculator
@@ -22,7 +20,7 @@ class FiveDayWeatherForecastAdapter(
             parent,
             false
         )
-        return FiveDayWeatherForecastViewHolder(itemView, viewModel)
+        return FiveDayWeatherForecastViewHolder(itemView, GlideImageLoader(parent.context))
     }
 
     override fun onBindViewHolder(holder: FiveDayWeatherForecastViewHolder, position: Int) {
