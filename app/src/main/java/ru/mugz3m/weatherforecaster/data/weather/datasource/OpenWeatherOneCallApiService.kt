@@ -1,10 +1,10 @@
-package ru.mugz3m.weatherforecaster.data.datasource
+package ru.mugz3m.weatherforecaster.data.weather.datasource
 
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
-import ru.mugz3m.weatherforecaster.data.model.CurrentWeatherForecast
-import ru.mugz3m.weatherforecaster.data.model.FiveDayWeatherForecast
+import ru.mugz3m.weatherforecaster.data.weather.model.CurrentWeatherForecast
+import ru.mugz3m.weatherforecaster.data.weather.model.FiveDayWeatherForecast
 
 interface OpenWeatherOneCallApiService {
     @GET("data/2.5/weather")

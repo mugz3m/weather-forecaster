@@ -1,4 +1,4 @@
-package ru.mugz3m.weatherforecaster.data.model
+package ru.mugz3m.weatherforecaster.data.weather.model
 
 import com.google.gson.annotations.SerializedName
 

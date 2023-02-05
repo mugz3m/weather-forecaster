@@ -1,7 +1,7 @@
 package ru.mugz3m.weatherforecaster.ui.model
 
-import ru.mugz3m.weatherforecaster.data.model.CurrentWeatherForecast
-import ru.mugz3m.weatherforecaster.data.model.FiveDayWeatherForecastItem
+import ru.mugz3m.weatherforecaster.data.weather.model.CurrentWeatherForecast
+import ru.mugz3m.weatherforecaster.data.weather.model.FiveDayWeatherForecastItem
 
 class WeatherForecastDataTransformer {
     fun transformCurrentWeatherForecastToCurrentWeatherForecastModel(
@@ -32,7 +32,7 @@ class WeatherForecastDataTransformer {
     fun transformFiveDayWeatherForecastItemListToFiveDayWeatherForecastModelList(
         fiveDayWeatherForecastItems: List<FiveDayWeatherForecastItem>
     ): List<FiveDayWeatherForecastItemModel> =
-        fiveDayWeatherForecastItems.map { it ->
+        fiveDayWeatherForecastItems.map {
             transformFiveDayWeatherForecastItemToFiveDayWeatherForecastModel(it)
         }
 }

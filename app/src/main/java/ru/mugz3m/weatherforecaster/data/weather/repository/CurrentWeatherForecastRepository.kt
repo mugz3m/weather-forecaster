@@ -1,21 +1,22 @@
-package ru.mugz3m.weatherforecaster.data.repository
+package ru.mugz3m.weatherforecaster.data.weather.repository
 
 import androidx.annotation.MainThread
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import ru.mugz3m.weatherforecaster.data.datasource.OpenWeatherOneCallDataSource
-import ru.mugz3m.weatherforecaster.data.model.FiveDayWeatherForecast
+import ru.mugz3m.weatherforecaster.data.weather.datasource.OpenWeatherOneCallDataSource
+import ru.mugz3m.weatherforecaster.data.weather.model.CurrentWeatherForecast
 
-class FiveDayWeatherForecastRepository(
+class CurrentWeatherForecastRepository(
     private val dataSource: OpenWeatherOneCallDataSource
 ) {
-    private val _fiveDayWeatherForecast = MutableLiveData<FiveDayWeatherForecast>()
-    val fiveDayWeatherForecast: LiveData<FiveDayWeatherForecast> = _fiveDayWeatherForecast
+    private val _currentWeatherForecast = MutableLiveData<CurrentWeatherForecast>()
+    val currentWeatherForecast: LiveData<CurrentWeatherForecast> =
+        _currentWeatherForecast
 
     @MainThread
-    suspend fun updateFiveDayWeatherForecast(
+    suspend fun updateCurrentWeatherForecast(
         latitude: Double,
         longitude: Double,
         apiKey: String,
@@ -23,13 +24,13 @@ class FiveDayWeatherForecastRepository(
         language: String
     ) {
         withContext(Dispatchers.IO) {
-            dataSource.getFiveDayWeatherForecast(
+            dataSource.getCurrentWeatherForecast(
                 latitude,
                 longitude,
                 apiKey,
                 units,
                 language,
-                _fiveDayWeatherForecast
+                _currentWeatherForecast
             )
         }
     }

@@ -6,32 +6,44 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.joinAll
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import ru.mugz3m.weatherforecaster.data.repository.CurrentWeatherForecastRepository
-import ru.mugz3m.weatherforecaster.data.repository.FiveDayWeatherForecastRepository
+import ru.mugz3m.weatherforecaster.data.location.repository.LocationRepository
+import ru.mugz3m.weatherforecaster.data.weather.repository.CurrentWeatherForecastRepository
+import ru.mugz3m.weatherforecaster.data.weather.repository.FiveDayWeatherForecastRepository
 
 class WeatherViewModel(
     private val currentWeatherForecastRepository: CurrentWeatherForecastRepository,
-    private val fiveDayWeatherForecastRepository: FiveDayWeatherForecastRepository
+    private val fiveDayWeatherForecastRepository: FiveDayWeatherForecastRepository,
+    locationRepository: LocationRepository
 ) : ViewModel() {
     val currentWeatherForecast = currentWeatherForecastRepository.currentWeatherForecast
     val fiveDayWeatherForecast = fiveDayWeatherForecastRepository.fiveDayWeatherForecast
 
-    init {
-        updateAllWeatherForecasts()
-    }
+    val currentLocation = locationRepository.currentLocation
 
     fun updateAllWeatherForecasts() {
-        viewModelScope.launch {
-            withContext(Dispatchers.Main) {
-                listOf(launch {
-                    currentWeatherForecastRepository.updateCurrentWeatherForecast(
-                        55.75, 37.61, "9f3f82c0c44e6c4edfbdc8061b5954a5", "metric", "en"
-                    )
-                }, launch {
-                    fiveDayWeatherForecastRepository.updateFiveDayWeatherForecast(
-                        55.75, 37.61, "9f3f82c0c44e6c4edfbdc8061b5954a5", "metric", "en"
-                    )
-                }).joinAll()
+        val latitude = currentLocation.value?.latitude
+        val longitude = currentLocation.value?.longitude
+        if (latitude != null && longitude != null) {
+            viewModelScope.launch {
+                withContext(Dispatchers.IO) {
+                    listOf(launch {
+                        currentWeatherForecastRepository.updateCurrentWeatherForecast(
+                            latitude = latitude,
+                            longitude = longitude,
+                            apiKey = "9f3f82c0c44e6c4edfbdc8061b5954a5",
+                            units = "metric",
+                            language = "en"
+                        )
+                    }, launch {
+                        fiveDayWeatherForecastRepository.updateFiveDayWeatherForecast(
+                            latitude = latitude,
+                            longitude = longitude,
+                            apiKey = "9f3f82c0c44e6c4edfbdc8061b5954a5",
+                            units = "metric",
+                            language = "en"
+                        )
+                    }).joinAll()
+                }
             }
         }
     }
