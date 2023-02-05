@@ -25,7 +25,7 @@ class FiveDayWeatherForecastViewHolder(itemView: View, private val glideImageLoa
 
     @SuppressLint("SimpleDateFormat")
     private fun formatUnixTimeToDate(unixTime: Long): String {
-        val dateFormat = SimpleDateFormat("dd/MM HH:mm")
+        val dateFormat = SimpleDateFormat("EEE, MMM dd HH:mm")
         return dateFormat.format(Date(unixTime * 1000L))
     }
 }
