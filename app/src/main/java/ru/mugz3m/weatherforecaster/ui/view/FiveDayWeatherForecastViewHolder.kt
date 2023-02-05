@@ -11,16 +11,11 @@ import ru.mugz3m.weatherforecaster.ui.model.FiveDayWeatherForecastItemModel
 import java.text.SimpleDateFormat
 import java.util.*
 
-class FiveDayWeatherForecastViewHolder(
-    itemView: View,
-    private val glideImageLoader: GlideImageLoader
-) : RecyclerView.ViewHolder(itemView) {
-    private val date =
-        itemView.findViewById<TextView>(R.id.five_day_weather_forecast_item_forecasted_date)
-    private val icon =
-        itemView.findViewById<ImageView>(R.id.five_day_weather_forecast_item_weather_condition_icon)
-    private val temperature =
-        itemView.findViewById<TextView>(R.id.five_day_weather_forecast_item_temperature)
+class FiveDayWeatherForecastViewHolder(itemView: View, private val glideImageLoader: GlideImageLoader) :
+    RecyclerView.ViewHolder(itemView) {
+    private val date = itemView.findViewById<TextView>(R.id.five_day_weather_forecast_item_forecasted_date)
+    private val icon = itemView.findViewById<ImageView>(R.id.five_day_weather_forecast_item_weather_condition_icon)
+    private val temperature = itemView.findViewById<TextView>(R.id.five_day_weather_forecast_item_temperature)
 
     fun bind(fiveDayWeatherForecast: FiveDayWeatherForecastItemModel) {
         date.text = formatUnixTimeToDate(fiveDayWeatherForecast.timeOfTheForecastedData)

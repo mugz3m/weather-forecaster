@@ -3,8 +3,7 @@ package ru.mugz3m.weatherforecaster.ui.view
 import androidx.recyclerview.widget.DiffUtil
 import ru.mugz3m.weatherforecaster.ui.model.FiveDayWeatherForecastItemModel
 
-class FiveDayWeatherForecastItemDiffCalculator :
-    DiffUtil.ItemCallback<FiveDayWeatherForecastItemModel>() {
+class FiveDayWeatherForecastItemDiffCalculator : DiffUtil.ItemCallback<FiveDayWeatherForecastItemModel>() {
     override fun areItemsTheSame(
         oldItem: FiveDayWeatherForecastItemModel,
         newItem: FiveDayWeatherForecastItemModel

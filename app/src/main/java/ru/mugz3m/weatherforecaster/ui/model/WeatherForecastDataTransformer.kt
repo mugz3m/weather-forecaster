@@ -32,7 +32,7 @@ class WeatherForecastDataTransformer {
     fun transformFiveDayWeatherForecastItemListToFiveDayWeatherForecastModelList(
         fiveDayWeatherForecastItems: List<FiveDayWeatherForecastItem>
     ): List<FiveDayWeatherForecastItemModel> =
-        fiveDayWeatherForecastItems.map { it ->
+        fiveDayWeatherForecastItems.map {
             transformFiveDayWeatherForecastItemToFiveDayWeatherForecastModel(it)
         }
 }

@@ -22,8 +22,7 @@ class WeatherForecastsViewController(
 ) {
     private val weatherForecastDataTransformer = WeatherForecastDataTransformer()
 
-    private val currentWeatherForecastTemperature: TextView =
-        rootView.findViewById(R.id.fragment_weather_temperature)
+    private val currentWeatherForecastTemperature: TextView = rootView.findViewById(R.id.fragment_weather_temperature)
     private val currentWeatherForecastWeatherConditionIcon: ImageView =
         rootView.findViewById(R.id.fragment_weather_weather_condition_icon)
     private val currentWeatherForecastWeatherConditionDescription: TextView =
@@ -34,46 +33,37 @@ class WeatherForecastsViewController(
         rootView.findViewById(R.id.fragment_weather_wind_speed)
     private val currentWeatherForecastWeatherWindDirection: TextView =
         rootView.findViewById(R.id.fragment_weather_wind_direction)
-    private val currentWeatherForecastWeatherPressure: TextView =
-        rootView.findViewById(R.id.fragment_weather_pressure)
-    private val currentWeatherForecastWeatherHumidity: TextView =
-        rootView.findViewById(R.id.fragment_weather_humidity)
-
+    private val currentWeatherForecastWeatherPressure: TextView = rootView.findViewById(R.id.fragment_weather_pressure)
+    private val currentWeatherForecastWeatherHumidity: TextView = rootView.findViewById(R.id.fragment_weather_humidity)
     private val fiveDayWeatherForecastRecyclerView: RecyclerView =
         rootView.findViewById(R.id.fragment_weather_five_day_forecast_recycler_view)
     private val swipeRefreshLayout: SwipeRefreshLayout =
         rootView.findViewById(R.id.fragment_weather_swipe_refresh_layout)
 
     fun setUpViews() {
+        swipeRefreshLayout.isRefreshing = true
         setUpCurrentWeatherForecast()
         setUpFiveDayWeatherForecastsList()
         setUpSwipeToRefresh()
+        setUpLocationObserver()
     }
 
     private fun setUpCurrentWeatherForecast() {
-        viewModel.currentWeatherForecast.observe(lifecycleOwner) { newCurrentWeatherForecast ->
-            val newCurrentWeatherForecastModel =
-                weatherForecastDataTransformer.transformCurrentWeatherForecastToCurrentWeatherForecastModel(
-                    newCurrentWeatherForecast
-                )
-            currentWeatherForecastTemperature.text =
-                newCurrentWeatherForecastModel.temperature.toString().plus(" °C")
+        viewModel.currentWeatherForecast.observe(lifecycleOwner) { forecast ->
+            val forecastModel =
+                weatherForecastDataTransformer.transformCurrentWeatherForecastToCurrentWeatherForecastModel(forecast)
+            currentWeatherForecastTemperature.text = forecastModel.temperature.toString().plus(" °C")
             glideImageLoader.loadWeatherIconInImageView(
-                newCurrentWeatherForecastModel.weatherIconId,
+                forecastModel.weatherIconId,
                 currentWeatherForecastWeatherConditionIcon
             )
-            currentWeatherForecastWeatherConditionDescription.text =
-                newCurrentWeatherForecastModel.weatherCondition
+            currentWeatherForecastWeatherConditionDescription.text = forecastModel.weatherCondition
             currentWeatherForecastWeatherFeelsLikeTemperature.text =
-                newCurrentWeatherForecastModel.feelsLikeTemperature.toString().plus(" °C")
-            currentWeatherForecastWeatherWindSpeed.text =
-                newCurrentWeatherForecastModel.windSpeed.toString()
-            currentWeatherForecastWeatherWindDirection.text =
-                newCurrentWeatherForecastModel.windDirection.toString()
-            currentWeatherForecastWeatherPressure.text =
-                newCurrentWeatherForecastModel.atmosphericPressure.toString()
-            currentWeatherForecastWeatherHumidity.text =
-                newCurrentWeatherForecastModel.humidity.toString()
+                forecastModel.feelsLikeTemperature.toString().plus(" °C")
+            currentWeatherForecastWeatherWindSpeed.text = forecastModel.windSpeed.toString()
+            currentWeatherForecastWeatherWindDirection.text = forecastModel.windDirection.toString()
+            currentWeatherForecastWeatherPressure.text = forecastModel.atmosphericPressure.toString()
+            currentWeatherForecastWeatherHumidity.text = forecastModel.humidity.toString()
 
             swipeRefreshLayout.isRefreshing = false
         }
@@ -95,6 +85,13 @@ class WeatherForecastsViewController(
     private fun setUpSwipeToRefresh() {
         swipeRefreshLayout.setOnRefreshListener {
             viewModel.updateAllWeatherForecasts()
+        }
+    }
+
+    private fun setUpLocationObserver() {
+        viewModel.currentLocation.observe(lifecycleOwner) {
+            viewModel.updateAllWeatherForecasts()
+            swipeRefreshLayout.isRefreshing = false
         }
     }
 }
