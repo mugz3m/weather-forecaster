@@ -57,9 +57,8 @@ class WeatherForecastsViewController(
                 forecastModel.weatherIconId,
                 currentWeatherForecastWeatherConditionIcon
             )
-            currentWeatherForecastWeatherConditionDescription.text = forecastModel.weatherCondition
-            currentWeatherForecastWeatherFeelsLikeTemperature.text =
-                forecastModel.feelsLikeTemperature.toString().plus(" °C")
+            currentWeatherForecastWeatherConditionDescription.text = forecastModel.weatherCondition.replaceFirstChar { it.uppercase() }
+            currentWeatherForecastWeatherFeelsLikeTemperature.text = forecastModel.feelsLikeTemperature.toString().plus(" °C")
             currentWeatherForecastWeatherWindSpeed.text = forecastModel.windSpeed.toString()
             currentWeatherForecastWeatherWindDirection.text = forecastModel.windDirection.toString()
             currentWeatherForecastWeatherPressure.text = forecastModel.atmosphericPressure.toString()

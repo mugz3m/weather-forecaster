@@ -4,10 +4,8 @@ import ru.mugz3m.weatherforecaster.data.weather.model.CurrentWeatherForecast
 import ru.mugz3m.weatherforecaster.data.weather.model.FiveDayWeatherForecastItem
 
 class WeatherForecastDataTransformer {
-    fun transformCurrentWeatherForecastToCurrentWeatherForecastModel(
-        currentWeatherForecast: CurrentWeatherForecast
-    ): CurrentWeatherForecastModel {
-        return CurrentWeatherForecastModel(
+    fun transformCurrentWeatherForecastToCurrentWeatherForecastModel(currentWeatherForecast: CurrentWeatherForecast) =
+        CurrentWeatherForecastModel(
             currentWeatherForecast.weatherParameters.temperature,
             currentWeatherForecast.weatherParameters.feelsLikeTemperature,
             currentWeatherForecast.weatherParameters.atmosphericPressure,
@@ -17,22 +15,19 @@ class WeatherForecastDataTransformer {
             currentWeatherForecast.weatherConditions[0].weatherCondition,
             currentWeatherForecast.weatherConditions[0].weatherIconId
         )
-    }
 
-    private fun transformFiveDayWeatherForecastItemToFiveDayWeatherForecastModel(
-        fiveDayWeatherForecastItem: FiveDayWeatherForecastItem
-    ): FiveDayWeatherForecastItemModel {
-        return FiveDayWeatherForecastItemModel(
-            fiveDayWeatherForecastItem.timeOfTheForecastedData,
-            fiveDayWeatherForecastItem.weatherParameters.temperature,
-            fiveDayWeatherForecastItem.weatherConditions[0].weatherIconId
-        )
-    }
+private fun transformFiveDayWeatherForecastItemToFiveDayWeatherForecastModel(
+    fiveDayWeatherForecastItem: FiveDayWeatherForecastItem
+): FiveDayWeatherForecastItemModel {
+    return FiveDayWeatherForecastItemModel(
+        fiveDayWeatherForecastItem.timeOfTheForecastedData,
+        fiveDayWeatherForecastItem.weatherParameters.temperature,
+        fiveDayWeatherForecastItem.weatherConditions[0].weatherIconId
+    )
+}
 
-    fun transformFiveDayWeatherForecastItemListToFiveDayWeatherForecastModelList(
-        fiveDayWeatherForecastItems: List<FiveDayWeatherForecastItem>
-    ): List<FiveDayWeatherForecastItemModel> =
-        fiveDayWeatherForecastItems.map {
-            transformFiveDayWeatherForecastItemToFiveDayWeatherForecastModel(it)
-        }
+fun transformFiveDayWeatherForecastItemListToFiveDayWeatherForecastModelList(fiveDayWeatherForecastItems: List<FiveDayWeatherForecastItem>): List<FiveDayWeatherForecastItemModel> =
+    fiveDayWeatherForecastItems.map {
+        transformFiveDayWeatherForecastItemToFiveDayWeatherForecastModel(it)
+    }
 }
