@@ -20,7 +20,8 @@ class FiveDayWeatherForecastRepository(
         longitude: Double,
         apiKey: String,
         units: String,
-        language: String
+        language: String,
+        showProgress: MutableLiveData<Boolean>
     ) {
         withContext(Dispatchers.IO) {
             dataSource.getFiveDayWeatherForecast(
@@ -29,7 +30,8 @@ class FiveDayWeatherForecastRepository(
                 apiKey,
                 units,
                 language,
-                _fiveDayWeatherForecast
+                _fiveDayWeatherForecast,
+                showProgress
             )
         }
     }

@@ -16,7 +16,8 @@ class OpenWeatherOneCallDataSource(private val retrofit: Retrofit) {
         apiKey: String,
         units: String,
         language: String,
-        getCurrentWeatherForecastLiveData: MutableLiveData<CurrentWeatherForecast>
+        getCurrentWeatherForecastLiveData: MutableLiveData<CurrentWeatherForecast>,
+        showProgress: MutableLiveData<Boolean>
     ) {
         val service = retrofit.create(OpenWeatherOneCallApiService::class.java)
         val call = service.getCurrentWeatherForecast(latitude, longitude, apiKey, units, language)
@@ -25,10 +26,12 @@ class OpenWeatherOneCallDataSource(private val retrofit: Retrofit) {
                 if (response.code() == 200) {
                     getCurrentWeatherForecastLiveData.value = response.body()
                 }
+                showProgress.value = false
             }
 
             override fun onFailure(call: Call<CurrentWeatherForecast>, throwable: Throwable) {
                 Log.e(TAG, throwable.message.toString())
+                showProgress.value = false
             }
         })
     }
@@ -39,7 +42,8 @@ class OpenWeatherOneCallDataSource(private val retrofit: Retrofit) {
         apiKey: String,
         units: String,
         language: String,
-        getFiveDayWeatherForecastLiveData: MutableLiveData<FiveDayWeatherForecast>
+        getFiveDayWeatherForecastLiveData: MutableLiveData<FiveDayWeatherForecast>,
+        showProgress: MutableLiveData<Boolean>
     ) {
         val service = retrofit.create(OpenWeatherOneCallApiService::class.java)
         val call = service.getFiveDayWeatherForecast(latitude, longitude, apiKey, units, language)
@@ -48,10 +52,12 @@ class OpenWeatherOneCallDataSource(private val retrofit: Retrofit) {
                 if (response.code() == 200) {
                     getFiveDayWeatherForecastLiveData.value = response.body()
                 }
+                showProgress.value = false
             }
 
             override fun onFailure(call: Call<FiveDayWeatherForecast>, throwable: Throwable) {
                 Log.e(TAG, throwable.message.toString())
+                showProgress.value = false
             }
         })
     }

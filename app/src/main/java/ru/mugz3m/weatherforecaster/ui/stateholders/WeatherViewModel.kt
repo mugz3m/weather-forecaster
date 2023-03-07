@@ -1,5 +1,7 @@
 package ru.mugz3m.weatherforecaster.ui.stateholders
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
@@ -17,10 +19,13 @@ class WeatherViewModel(
 ) : ViewModel() {
     val currentWeatherForecast = currentWeatherForecastRepository.currentWeatherForecast
     val fiveDayWeatherForecast = fiveDayWeatherForecastRepository.fiveDayWeatherForecast
-
     val currentLocation = locationRepository.currentLocation
 
+    private val _showProgress = MutableLiveData<Boolean>()
+    val showProgress: LiveData<Boolean> = _showProgress
+
     fun updateAllWeatherForecasts() {
+        _showProgress.value = true
         val latitude = currentLocation.value?.latitude
         val longitude = currentLocation.value?.longitude
         if (latitude != null && longitude != null) {
@@ -32,7 +37,8 @@ class WeatherViewModel(
                             longitude = longitude,
                             apiKey = "9f3f82c0c44e6c4edfbdc8061b5954a5",
                             units = "metric",
-                            language = "en"
+                            language = "en",
+                            showProgress = _showProgress
                         )
                     }, launch {
                         fiveDayWeatherForecastRepository.updateFiveDayWeatherForecast(
@@ -40,7 +46,8 @@ class WeatherViewModel(
                             longitude = longitude,
                             apiKey = "9f3f82c0c44e6c4edfbdc8061b5954a5",
                             units = "metric",
-                            language = "en"
+                            language = "en",
+                            showProgress = _showProgress
                         )
                     }).joinAll()
                 }

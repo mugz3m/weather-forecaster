@@ -21,7 +21,8 @@ class CurrentWeatherForecastRepository(
         longitude: Double,
         apiKey: String,
         units: String,
-        language: String
+        language: String,
+        showProgress: MutableLiveData<Boolean>
     ) {
         withContext(Dispatchers.IO) {
             dataSource.getCurrentWeatherForecast(
@@ -30,7 +31,8 @@ class CurrentWeatherForecastRepository(
                 apiKey,
                 units,
                 language,
-                _currentWeatherForecast
+                _currentWeatherForecast,
+                showProgress
             )
         }
     }
