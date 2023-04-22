@@ -3,22 +3,20 @@ package ru.mugz3m.weatherforecaster.data.weather.model
 import com.google.gson.annotations.SerializedName
 
 data class CurrentWeatherForecast(
-    @SerializedName("cod") val responseCode: Int,
-    @SerializedName("coord") val forecastCoordinates: ForecastCoordinates,
-    @SerializedName("weather") val weatherConditions: List<WeatherConditions>,
-    @SerializedName("main") val weatherParameters: WeatherParameters,
-    @SerializedName("wind") val wind: WindParameters,
-    @SerializedName("clouds") val clouds: CloudsParameters,
-    @SerializedName("dt") val currentTime: Long,
-    @SerializedName("sys") val system: ForecastSystemData,
-    @SerializedName("timezone") val timezone: Long,
+    @SerializedName("latitude") val latitude: Double,
+    @SerializedName("longitude") val longitude: Double,
+    @SerializedName("generationtime_ms") val generationTimeMillis: Double,
+    @SerializedName("utc_offset_seconds") val utcOffsetSeconds: Long,
+    @SerializedName("timezone") val timezone: String,
+    @SerializedName("timezone_abbreviation") val timezoneAbbreviation: String,
+    @SerializedName("elevation") val elevation: Int,
+    @SerializedName("current_weather") val currentWeather: CurrentWeather,
 )
 
-data class ForecastSystemData(
-    @SerializedName("type") val type: Int,
-    @SerializedName("id") val id: Int,
-    @SerializedName("message") val message: String,
-    @SerializedName("country") val country: String,
-    @SerializedName("sunrise") val sunrise: Long,
-    @SerializedName("sunset") val sunset: Long
+data class CurrentWeather(
+    @SerializedName("temperature") val temperature: Double,
+    @SerializedName("windspeed") val windSpeed: Double,
+    @SerializedName("winddirection") val windDirection: Int,
+    @SerializedName("weathercode") val weatherCode: Int,
+    @SerializedName("time") val time: String,
 )

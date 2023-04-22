@@ -5,40 +5,49 @@
         android:layout_height="wrap_content">
 
     <TextView
-            android:id="@+id/five_day_weather_forecast_item_forecasted_date"
+            android:id="@+id/itemDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8sp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constrainedWidth="true"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constrainedWidth="true"
-            app:layout_constraintEnd_toStartOf="@+id/five_day_weather_forecast_item_weather_condition_icon"
+            app:layout_constraintEnd_toStartOf="@+id/itemWeatherCondition"
             app:layout_constraintHorizontal_chainStyle="spread_inside" />
 
     <ImageView
-            android:id="@+id/five_day_weather_forecast_item_weather_condition_icon"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            app:layout_constrainedWidth="true"
-            android:contentDescription="@string/weather_condition_icon_content_description"
-            app:layout_constraintStart_toEndOf="@+id/five_day_weather_forecast_item_forecasted_date"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintEnd_toStartOf="@+id/five_day_weather_forecast_item_temperature"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
-
-    <TextView
-            android:id="@+id/five_day_weather_forecast_item_temperature"
+            android:id="@+id/itemWeatherCondition"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8sp"
+            app:layout_constrainedWidth="true"
+            android:contentDescription="@string/weather_condition_icon_content_description"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/itemDate"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toStartOf="@+id/itemMaxTemperature" />
+
+    <TextView
+            android:id="@+id/itemMaxTemperature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/itemWeatherCondition"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toStartOf="@+id/itemMinTemperature" />
+
+    <TextView
+            android:id="@+id/itemMinTemperature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:layout_constrainedWidth="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/five_day_weather_forecast_item_weather_condition_icon"
+            app:layout_constraintStart_toEndOf="@+id/itemMaxTemperature"
             app:layout_constraintHorizontal_bias="0.5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

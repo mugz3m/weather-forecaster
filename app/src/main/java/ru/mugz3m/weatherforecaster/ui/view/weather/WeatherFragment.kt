@@ -1,4 +1,4 @@
-package ru.mugz3m.weatherforecaster.ui.view
+package ru.mugz3m.weatherforecaster.ui.view.weather
 
 import android.os.Bundle
 import android.view.LayoutInflater
