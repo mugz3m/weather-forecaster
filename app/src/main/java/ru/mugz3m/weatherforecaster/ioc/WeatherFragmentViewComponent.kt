@@ -2,8 +2,7 @@ package ru.mugz3m.weatherforecaster.ioc
 
 import android.view.View
 import androidx.lifecycle.LifecycleOwner
-import ru.mugz3m.weatherforecaster.ui.view.GlideImageLoader
-import ru.mugz3m.weatherforecaster.ui.view.WeatherForecastsViewController
+import ru.mugz3m.weatherforecaster.ui.view.weather.WeatherForecastsViewController
 
 class WeatherFragmentViewComponent(
     fragmentComponent: WeatherFragmentComponent,
@@ -11,11 +10,10 @@ class WeatherFragmentViewComponent(
     lifecycleOwner: LifecycleOwner
 ) {
     val weatherForecastsViewController = WeatherForecastsViewController(
-        fragmentComponent.fragment.requireActivity(),
+        fragmentComponent.fragment.requireActivity().application,
         root,
         fragmentComponent.fiveDayWeatherForecastAdapter,
         lifecycleOwner,
-        fragmentComponent.viewModel,
-        GlideImageLoader(fragmentComponent.fragment.requireContext())
+        fragmentComponent.viewModel
     )
 }

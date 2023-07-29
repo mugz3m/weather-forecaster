@@ -9,16 +9,15 @@ import kotlinx.coroutines.joinAll
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import ru.mugz3m.weatherforecaster.data.location.repository.LocationRepository
-import ru.mugz3m.weatherforecaster.data.weather.repository.CurrentWeatherForecastRepository
-import ru.mugz3m.weatherforecaster.data.weather.repository.FiveDayWeatherForecastRepository
+import ru.mugz3m.weatherforecaster.data.weather.repository.WeatherForecastRepository
 
 class WeatherViewModel(
-    private val currentWeatherForecastRepository: CurrentWeatherForecastRepository,
-    private val fiveDayWeatherForecastRepository: FiveDayWeatherForecastRepository,
+    private val weatherForecastRepository: WeatherForecastRepository,
     locationRepository: LocationRepository
 ) : ViewModel() {
-    val currentWeatherForecast = currentWeatherForecastRepository.currentWeatherForecast
-    val fiveDayWeatherForecast = fiveDayWeatherForecastRepository.fiveDayWeatherForecast
+    val currentWeatherForecast = weatherForecastRepository.currentWeatherForecast
+    val weekWeatherForecast = weatherForecastRepository.weekWeatherForecast
+
     val currentLocation = locationRepository.currentLocation
 
     private val _showProgress = MutableLiveData<Boolean>()
@@ -26,32 +25,26 @@ class WeatherViewModel(
 
     fun updateAllWeatherForecasts() {
         _showProgress.value = true
-        val latitude = currentLocation.value?.latitude
-        val longitude = currentLocation.value?.longitude
-        if (latitude != null && longitude != null) {
+        if (currentLocation.value != null)
             viewModelScope.launch {
                 withContext(Dispatchers.IO) {
-                    listOf(launch {
-                        currentWeatherForecastRepository.updateCurrentWeatherForecast(
-                            latitude = latitude,
-                            longitude = longitude,
-                            apiKey = "9f3f82c0c44e6c4edfbdc8061b5954a5",
-                            units = "metric",
-                            language = "en",
-                            showProgress = _showProgress
-                        )
-                    }, launch {
-                        fiveDayWeatherForecastRepository.updateFiveDayWeatherForecast(
-                            latitude = latitude,
-                            longitude = longitude,
-                            apiKey = "9f3f82c0c44e6c4edfbdc8061b5954a5",
-                            units = "metric",
-                            language = "en",
-                            showProgress = _showProgress
-                        )
-                    }).joinAll()
+                    listOf(
+                        launch {
+                            weatherForecastRepository.updateCurrentWeatherForecast(
+                                latitude = currentLocation.value!!.latitude,
+                                longitude = currentLocation.value!!.longitude,
+                                showProgress = _showProgress
+                            )
+                        },
+                        launch {
+                            weatherForecastRepository.updateWeekWeatherForecast(
+                                latitude = currentLocation.value!!.latitude,
+                                longitude = currentLocation.value!!.longitude,
+                                showProgress = _showProgress
+                            )
+                        },
+                    ).joinAll()
                 }
             }
-        }
     }
 }

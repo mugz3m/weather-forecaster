@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_graph_fragment_weather"
-        android:name="ru.mugz3m.weatherforecaster.ui.view.WeatherFragment"
+        android:name="ru.mugz3m.weatherforecaster.ui.view.weather.WeatherFragment"
         android:label="@string/navigation_graph_fragment_weather_card_name"
         tools:layout="@layout/fragment_weather" />
 

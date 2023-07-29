@@ -9,6 +9,6 @@ interface LocationClient {
     class LocationException(message: String) : Exception()
 
     companion object {
-        const val DEFAULT_LOCATION_UPDATES_INTERVAL_MILLIS = 5000L
+        const val DEFAULT_LOCATION_UPDATES_INTERVAL_MILLIS = 60000L
     }
 }
