@@ -1,0 +1,58 @@
+[versions]
+kotlin = "1.9.0"
+androidGradlePlugin = "8.1.0"
+
+coreKtx = "1.10.1"
+appCopmpat = "1.6.1"
+constraintLayout = "2.1.4"
+lifecycle = "2.6.1"
+fragment = "1.6.1"
+swiperefreshlayout = "1.1.0"
+navigation = "2.6.0"
+
+material = "1.9.0"
+
+coroutines = "1.7.1"
+
+retrofit = "2.9.0"
+gson = "2.10.1"
+
+glide = "4.15.1"
+
+location = "21.0.1"
+
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
+android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
+android-kotlin = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+
+
+[libraries]
+androidx-coreKtx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appCopmpat" }
+androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintLayout" }
+androidx-lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
+androidx-lifecycle-livedata = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycle" }
+androidx-fragment = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragment" }
+androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
+androidx-navigation-fragment = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigation" }
+androidx-navigation-ui = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigation" }
+androidx-navigation-dynamicFeatures = { group = "androidx.navigation", name = "navigation-dynamic-features-fragment", version.ref = "navigation" }
+
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+
+coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines" }
+coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
+
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+retrofit-converterGson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
+gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
+
+glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
+
+location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "location" }
+
+
+[bundles]
+retrofit2 = ["retrofit", "retrofit-converterGson", "gson"]
